@@ -3,8 +3,7 @@
         <div class="form">
             <form @submit.prevent="submit">
                 <div>
-                    <object width="64" height="64" data="/icon.svg" />
-                    <div style="font-size: 28px; font-weight: bold; margin-top: 5px">Webkorps</div>
+                    <object class="brand-logo" data="/webkorps-logo.svg" aria-label="Webkorps" />
                 </div>
 
                 <p class="mt-3">
@@ -152,6 +151,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.brand-logo {
+    width: min(260px, 80vw);
+    height: auto;
+    aspect-ratio: 4 / 1;
+}
+
 .form-container {
     display: flex;
     align-items: center;

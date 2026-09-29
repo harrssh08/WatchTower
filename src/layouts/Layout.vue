@@ -18,8 +18,7 @@
                 to="/dashboard"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
             >
-                <object class="bi me-2 ms-4" width="40" height="40" data="/icon.svg" />
-                <span class="fs-4 title">{{ $t("Webkorps") }}</span>
+                <object class="brand-logo ms-4" data="/webkorps-logo.svg" aria-label="Webkorps" />
             </router-link>
 
             <a
@@ -120,8 +119,7 @@
         <!-- Mobile header -->
         <header v-else class="d-flex flex-wrap justify-content-center pt-2 pb-2 mb-3">
             <router-link to="/dashboard" class="d-flex align-items-center text-dark text-decoration-none">
-                <object class="bi" width="40" height="40" data="/icon.svg" />
-                <span class="fs-4 title ms-2">Webkorps</span>
+                <object class="brand-logo brand-logo-mobile" data="/webkorps-logo.svg" aria-label="Webkorps" />
             </router-link>
         </header>
 
@@ -302,8 +300,14 @@ main {
     min-height: calc(100vh - 160px);
 }
 
-.title {
-    font-weight: bold;
+.brand-logo {
+    width: 180px;
+    height: 45px;
+}
+
+.brand-logo-mobile {
+    width: 160px;
+    height: 40px;
 }
 
 .nav {

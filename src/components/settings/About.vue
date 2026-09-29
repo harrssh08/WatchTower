@@ -1,8 +1,7 @@
 <template>
     <div class="d-flex justify-content-center align-items-center">
         <div class="logo d-flex flex-column justify-content-center align-items-center">
-            <object class="my-4" width="200" height="200" data="/icon.svg" />
-            <div class="fs-4 fw-bold">Webkorps</div>
+            <object class="brand-logo my-4" data="/webkorps-logo.svg" aria-label="Webkorps" />
             <div>{{ $t("versionIs", { version: $root.info.version }) }}</div>
             <div class="frontend-version">{{ $t("frontendVersionIs", { version: $root.frontendVersion }) }}</div>
 
@@ -67,6 +66,12 @@ export default {
 <style lang="scss" scoped>
 .logo {
     margin: 4em 1em;
+}
+
+.brand-logo {
+    width: min(320px, 80vw);
+    height: auto;
+    aspect-ratio: 4 / 1;
 }
 
 .update-link {
