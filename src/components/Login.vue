@@ -1,7 +1,7 @@
 <template>
     <div class="form-container">
         <div class="form">
-            <form aria-label="Login Form" class="pt-3" @submit.prevent="submit">
+            <form aria-label="Login Form" class="login-form" @submit.prevent="submit">
                 <div v-if="!tokenRequired" class="form-floating">
                     <input
                         id="floatingInput"
@@ -15,10 +15,11 @@
                     <label for="floatingInput">{{ $t("Username") }}</label>
                 </div>
 
-                <div v-if="!tokenRequired" class="mt-3">
+                <div v-if="!tokenRequired">
                     <HiddenInput
                         id="floatingPassword"
                         v-model="password"
+                        :large="true"
                         :placeholder="$t('Password')"
                         autocomplete="current-password"
                         :required="true"
@@ -26,7 +27,7 @@
                 </div>
 
                 <div v-if="tokenRequired">
-                    <div class="form-floating mt-3">
+                    <div class="form-floating">
                         <input
                             id="otp"
                             ref="otpInput"
@@ -42,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="form-check mb-3 mt-3 d-flex justify-content-center pe-4">
+                <div class="remember-row">
                     <div class="form-check">
                         <input
                             id="remember"
@@ -57,11 +58,11 @@
                         </label>
                     </div>
                 </div>
-                <button class="w-100 btn btn-primary" type="submit" :disabled="processing">
+                <button class="login-button w-100 btn btn-primary" type="submit" :disabled="processing">
                     {{ $t("Login") }}
                 </button>
 
-                <div v-if="res && !res.ok" class="alert alert-danger mt-3" role="alert">
+                <div v-if="res && !res.ok" class="alert alert-danger" role="alert">
                     {{ $t(res.msg) }}
                 </div>
             </form>
@@ -138,8 +139,14 @@ export default {
 .form-container {
     display: flex;
     align-items: center;
-    padding-top: 40px;
+    justify-content: center;
+    padding-top: 56px;
     padding-bottom: 40px;
+}
+
+.login-form {
+    display: grid;
+    gap: 16px;
 }
 
 .form-floating {
@@ -148,15 +155,48 @@ export default {
     }
 
     > .form-control {
+        height: 56px;
+        min-height: 56px;
         padding-left: 1.3rem;
     }
 }
 
+.remember-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+
+    .form-check {
+        min-height: 0;
+        margin: 0;
+        padding-left: 1.75rem;
+    }
+
+    .form-check-input {
+        margin-top: 0.15rem;
+    }
+}
+
+.login-button {
+    min-height: 50px;
+}
+
 .form {
     width: 100%;
-    max-width: 330px;
-    padding: 15px;
+    max-width: 380px;
+    padding: 24px;
     margin: auto;
     text-align: center;
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding-top: 32px;
+    }
+
+    .form {
+        padding: 20px;
+    }
 }
 </style>

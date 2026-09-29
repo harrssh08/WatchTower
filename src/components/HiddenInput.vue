@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" :class="{ 'large-control': large }">
         <input
             ref="input"
             v-model="model"
@@ -53,6 +53,11 @@ export default {
             type: String,
             default: undefined,
         },
+        /** Use the larger control size used by primary authentication forms. */
+        large: {
+            type: Boolean,
+            default: false,
+        },
     },
     emits: ["update:modelValue"],
     data() {
@@ -89,3 +94,24 @@ export default {
     },
 };
 </script>
+
+<style lang="scss" scoped>
+.large-control {
+    height: 56px;
+    margin-bottom: 0 !important;
+
+    .form-control {
+        height: 56px;
+        padding: 0 1.3rem;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 58px;
+        height: 56px;
+        padding: 0;
+    }
+}
+</style>
