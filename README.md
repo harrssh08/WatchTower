@@ -1,205 +1,64 @@
-<div align="center" width="100%">
-    <img src="./public/icon.svg" width="128" alt="Webkorps Logo" />
+<div align="center">
+  <img src="./public/webkorps-logo.svg" width="240" alt="Webkorps" />
 </div>
 
 # Webkorps
 
-Webkorps is an easy-to-use self-hosted monitoring tool.
+Webkorps is a self-hosted uptime and service monitoring dashboard. It provides a clean white and light-blue interface for monitoring websites, APIs, servers, ports, certificates, and other infrastructure.
 
-<a target="_blank" href="https://github.com/harrssh08/WatchTower"><img src="https://img.shields.io/github/stars/harrssh08/watchtower?style=flat" /></a> <a target="_blank" href="https://hub.docker.com/r/harrssh08/watchtower"><img src="https://img.shields.io/docker/pulls/harrssh08/watchtower" /></a> <a target="_blank" href="https://hub.docker.com/r/harrssh08/watchtower"><img src="https://img.shields.io/docker/v/harrssh08/watchtower/2?label=docker%20image%20ver." /></a> <a target="_blank" href="https://github.com/harrssh08/WatchTower"><img src="https://img.shields.io/github/last-commit/harrssh08/watchtower" /></a> <a target="_blank" href="https://opencollective.com/webkorps"><img src="https://opencollective.com/webkorps/total/badge.svg?label=Open%20Collective%20Backers&color=brightgreen" /></a>
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/louislam?label=GitHub%20Sponsors)](https://github.com/sponsors/louislam) <a href="https://weblate.kuma.pet/projects/webkorps/webkorps/">
-<img src="https://weblate.kuma.pet/widgets/webkorps/-/svg-badge.svg" alt="Translation status" />
-</a>
+## Features
 
-<img src="https://user-images.githubusercontent.com/1336778/212262296-e6205815-ad62-488c-83ec-a5b0d0689f7c.jpg" width="700" alt="Webkorps Dashboard Screenshot" />
+- HTTP, TCP, ping, DNS, WebSocket, Docker, and push monitoring
+- Configurable check intervals and incident history
+- Notifications through email, Slack, Discord, Telegram, and other providers
+- Public status pages
+- Certificate expiry monitoring
+- Two-factor authentication
 
-## 🥔 Live Demo
+## Local Development
 
-Try it!
+### Requirements
 
-Demo Server (Location: Frankfurt - Germany): <https://demo.kuma.pet/start-demo>
+- Node.js 26.2.0 or newer
+- npm
+- Git
 
-It is a temporary live demo, all data will be deleted after 10 minutes. Sponsored by [Webkorps Sponsors](https://github.com/harrssh08/WatchTower#%EF%B8%8F-sponsors).
-
-## ⭐ Features
-
-- Monitoring uptime for HTTP(s) / TCP / HTTP(s) Keyword / HTTP(s) Json Query / Websocket / Ping / DNS Record / Push / Steam Game Server / Docker Containers
-- Fancy, Reactive, Fast UI/UX
-- Notifications via Telegram, Discord, Gotify, Slack, Pushover, Email (SMTP), and [90+ notification services, click here for the full list](https://github.com/harrssh08/WatchTower/tree/master/src/components/notifications)
-- 20-second intervals
-- [Multi Languages](https://github.com/harrssh08/WatchTower/tree/master/src/lang)
-- Multiple status pages
-- Map status pages to specific domains
-- Ping chart
-- Certificate info
-- Proxy support
-- 2FA support
-
-## 🔧 How to Install
-
-### 🐳 Docker Compose
-
-```bash
-mkdir webkorps
-cd webkorps
-curl -o compose.yaml https://raw.githubusercontent.com/harrssh08/WatchTower/master/compose.yaml
-docker compose up -d
-```
-
-Webkorps is now running on all network interfaces (e.g. http://localhost:3001 or http://your-ip:3001).
-
-> [!WARNING]
-> File Systems like **NFS** (Network File System) are **NOT** supported. Please map to a local directory or volume.
-
-### 🐳 Docker Command
-
-```bash
-docker run -d --restart=always -p 3001:3001 -v webkorps:/app/data --name webkorps harrssh08/watchtower:2
-```
-
-Webkorps is now running on all network interfaces (e.g. http://localhost:3001 or http://your-ip:3001).
-
-If you want to limit exposure to localhost only:
-
-```bash
-docker run ... -p 127.0.0.1:3001:3001 ...
-```
-
-### 💪🏻 Non-Docker
-
-Requirements:
-
-- Platform
-  - ✅ Major Linux distros such as Debian, Ubuntu, Fedora and ArchLinux etc.
-  - ✅ Windows 10 (x64), Windows Server 2012 R2 (x64) or higher
-  - ❌ FreeBSD / OpenBSD / NetBSD
-  - ❌ Replit / Heroku
-- [Node.js](https://nodejs.org/en/download/) >= 20.4
-- [Git](https://git-scm.com/downloads)
-- [pm2](https://pm2.keymetrics.io/) - For running Webkorps in the background
+### Start the application
 
 ```bash
 git clone https://github.com/harrssh08/WatchTower.git
-cd webkorps
-npm run setup
-
-# Option 1. Try it
-node server/server.js
-
-# (Recommended) Option 2. Run in the background using PM2
-# Install PM2 if you don't have it:
-npm install pm2 -g && pm2 install pm2-logrotate
-
-# Start Server
-pm2 start server/server.js --name webkorps
+cd WatchTower
+npm ci
+npm run dev
 ```
 
-Webkorps is now running on all network interfaces (e.g. http://localhost:3001 or http://your-ip:3001).
+Open <http://localhost:3000>. On the first run, follow the setup screen to create the administrator account.
 
-More useful PM2 Commands
+## Docker
 
 ```bash
-# If you want to see the current console output
-pm2 monit
-
-# If you want to add it to startup
-pm2 startup && pm2 save
+git clone https://github.com/harrssh08/WatchTower.git
+cd WatchTower
+docker compose up -d
 ```
 
-### Advanced Installation
+Open <http://localhost:3001>. Application data is stored in the local `data` directory.
 
-If you need more options or need to browse via a reverse proxy, please read:
+To stop the application:
 
-<https://github.com/harrssh08/WatchTower/wiki/%F0%9F%94%A7-How-to-Install>
+```bash
+docker compose down
+```
 
-## 🆙 How to Update
+## Useful Commands
 
-Please read:
+| Command         | Purpose                                            |
+| --------------- | -------------------------------------------------- |
+| `npm run dev`   | Start the frontend and backend in development mode |
+| `npm run build` | Create a production frontend build                 |
+| `npm run lint`  | Run JavaScript and style checks                    |
+| `npm test`      | Run backend and end-to-end tests                   |
 
-<https://github.com/harrssh08/WatchTower/wiki/%F0%9F%86%99-How-to-Update>
+## License
 
-## 🆕 What's Next?
-
-I will assign requests/issues to the next milestone.
-
-<https://github.com/harrssh08/WatchTower/milestones>
-
-## ❤️ Sponsors
-
-[![Powered by Atlas Cloud](https://www.atlascloud.ai/oss-program/powered-by-atlas-cloud.svg)](https://www.atlascloud.ai/?ref=UZCYBN)
-
-Thank you so much! (GitHub Sponsors will be updated manually. OpenCollective sponsors will be updated automatically, the list will be cached by GitHub though. It may need some time to be updated)
-
-<img src="https://uptime.kuma.pet/sponsors?v=6" alt="Webkorps Sponsors" />
-
-## 🖼 More Screenshots
-
-Light Mode:
-
-<img src="https://uptime.kuma.pet/img/light.jpg" width="512" alt="Webkorps Light Mode Screenshot of how the Dashboard looks" />
-
-Status Page:
-
-<img src="https://user-images.githubusercontent.com/1336778/134628766-a3fe0981-0926-4285-ab46-891a21c3e4cb.png" width="512" alt="Webkorps Status Page Screenshot" />
-
-Settings Page:
-
-<img src="https://louislam.net/webkorps/2.jpg" width="400" alt="Webkorps Settings Page Screenshot" />
-
-Telegram Notification Sample:
-
-<img src="https://louislam.net/webkorps/3.jpg" width="400" alt="Webkorps Telegram Notification Sample Screenshot" />
-
-## Motivation
-
-- I was looking for a self-hosted monitoring tool like "Uptime Robot", but it is hard to find a suitable one. One of the closest ones is statping. Unfortunately, it is not stable and no longer maintained.
-- Wanted to build a fancy UI.
-- Learn Vue 3 and vite.js.
-- Show the power of Bootstrap 5.
-- Try to use WebSocket with SPA instead of a REST API.
-- Deploy my first Docker image to Docker Hub.
-
-If you love this project, please consider giving it a ⭐.
-
-## 🗣️ Discussion / Ask for Help
-
-⚠️ For any general or technical questions, please don't send me an email, as I am unable to provide support in that manner. I will not respond if you ask questions there.
-
-I recommend using Google, GitHub Issues, or Webkorps's subreddit for finding answers to your question. If you cannot find the information you need, feel free to ask:
-
-- [GitHub Issues](https://github.com/harrssh08/WatchTower/issues)
-- [Subreddit (r/Webkorps)](https://www.reddit.com/r/Webkorps/)
-
-My Reddit account: [u/louislamlam](https://reddit.com/u/louislamlam)
-You can mention me if you ask a question on the subreddit.
-
-## Contributions
-
-### Create Pull Requests
-
-Pull requests are awesome.
-To keep reviews fast and effective, please make sure you’ve [read our pull request guidelines](https://github.com/harrssh08/WatchTower/blob/master/CONTRIBUTING.md#can-i-create-a-pull-request-for-webkorps).
-
-### Test Pull Requests
-
-There are a lot of pull requests right now, but I don't have time to test them all.
-
-If you want to help, you can check this:
-<https://github.com/harrssh08/WatchTower/wiki/Test-Pull-Requests>
-
-### Test Beta Version
-
-Check out the latest beta release here: <https://github.com/harrssh08/WatchTower/releases>
-
-### Bug Reports / Feature Requests
-
-If you want to report a bug or request a new feature, feel free to open a [new issue](https://github.com/harrssh08/WatchTower/issues).
-
-### Translations
-
-If you want to translate Webkorps into your language, please visit [Weblate Readme](https://github.com/harrssh08/WatchTower/blob/master/src/lang/README.md).
-
-### Spelling & Grammar
-
-Feel free to correct the grammar in the documentation or code.
-My mother language is not English and my grammar is not that great.
+Licensed under the [MIT License](./LICENSE). This project is customized from [Uptime Kuma](https://github.com/louislam/uptime-kuma).
