@@ -1,9 +1,9 @@
 version: "3.8"
 
 services:
-  uptime-kuma:
-    container_name: uptime-kuma-dev
-    image: louislam/uptime-kuma:nightly3
+  webkorps:
+    container_name: webkorps-dev
+    image: harrssh08/watchtower:nightly3
     volumes:
       #- ./data:/app/data
       - ../server:/app/server

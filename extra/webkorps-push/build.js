@@ -9,15 +9,15 @@ if (!platform) {
 const supportedPlatforms = [
     {
         name: "linux/amd64",
-        bin: "./build/uptime-kuma-push-amd64",
+        bin: "./build/webkorps-push-amd64",
     },
     {
         name: "linux/arm64",
-        bin: "./build/uptime-kuma-push-arm64",
+        bin: "./build/webkorps-push-arm64",
     },
     {
         name: "linux/arm/v7",
-        bin: "./build/uptime-kuma-push-armv7",
+        bin: "./build/webkorps-push-armv7",
     },
 ];
 
@@ -39,7 +39,7 @@ if (platformObj) {
         process.exit(1);
     }
 
-    fs.renameSync(filename, "./uptime-kuma-push");
+    fs.renameSync(filename, "./webkorps-push");
     process.exit(0);
 } else {
     console.error("Unsupported platform: " + platform);

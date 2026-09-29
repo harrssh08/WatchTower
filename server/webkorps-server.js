@@ -14,16 +14,16 @@ const path = require("path");
 const axios = require("axios");
 const { isSSL, sslKey, sslCert, sslKeyPassphrase } = require("./config");
 const { getSession, getDisableAuthSession } = require("./better-auth");
-// DO NOT IMPORT HERE IF THE MODULES USED `UptimeKumaServer.getInstance()`, put at the bottom of this file instead.
+// DO NOT IMPORT HERE IF THE MODULES USED `WebkorpsServer.getInstance()`, put at the bottom of this file instead.
 
 /**
  * `module.exports` (alias: `server`) should be inside this class, in order to avoid circular dependency issue.
- * @type {UptimeKumaServer}
+ * @type {WebkorpsServer}
  */
-class UptimeKumaServer {
+class WebkorpsServer {
     /**
      * Current server instance
-     * @type {UptimeKumaServer}
+     * @type {WebkorpsServer}
      */
     static instance = null;
 
@@ -58,20 +58,20 @@ class UptimeKumaServer {
     /**
      * Get the current instance of the server if it exists, otherwise
      * create a new instance.
-     * @returns {UptimeKumaServer} Server instance
+     * @returns {WebkorpsServer} Server instance
      */
     static getInstance() {
-        if (UptimeKumaServer.instance == null) {
-            UptimeKumaServer.instance = new UptimeKumaServer();
+        if (WebkorpsServer.instance == null) {
+            WebkorpsServer.instance = new WebkorpsServer();
         }
-        return UptimeKumaServer.instance;
+        return WebkorpsServer.instance;
     }
 
     /**
      *
      */
     constructor() {
-        // Set axios default user-agent to Uptime-Kuma/version
+        // Set axios default user-agent to Webkorps/version
         axios.defaults.headers.common["User-Agent"] = this.getUserAgent();
 
         // Set default axios timeout to 5 minutes instead of infinity
@@ -105,32 +105,32 @@ class UptimeKumaServer {
         }
 
         // Set Monitor Types
-        UptimeKumaServer.monitorTypeList["real-browser"] = new RealBrowserMonitorType();
-        UptimeKumaServer.monitorTypeList["tailscale-ping"] = new TailscalePing();
-        UptimeKumaServer.monitorTypeList["websocket-upgrade"] = new WebSocketMonitorType();
-        UptimeKumaServer.monitorTypeList["dns"] = new DnsMonitorType();
-        UptimeKumaServer.monitorTypeList["postgres"] = new PostgresMonitorType();
-        UptimeKumaServer.monitorTypeList["mqtt"] = new MqttMonitorType();
-        UptimeKumaServer.monitorTypeList["smtp"] = new SMTPMonitorType();
-        UptimeKumaServer.monitorTypeList["group"] = new GroupMonitorType();
-        UptimeKumaServer.monitorTypeList["snmp"] = new SNMPMonitorType();
-        UptimeKumaServer.monitorTypeList["grpc-keyword"] = new GrpcKeywordMonitorType();
-        UptimeKumaServer.monitorTypeList["mongodb"] = new MongodbMonitorType();
-        UptimeKumaServer.monitorTypeList["rabbitmq"] = new RabbitMqMonitorType();
-        UptimeKumaServer.monitorTypeList["sip-options"] = new SIPMonitorType();
-        UptimeKumaServer.monitorTypeList["gamedig"] = new GameDigMonitorType();
-        UptimeKumaServer.monitorTypeList["steam"] = new SteamMonitorType();
-        UptimeKumaServer.monitorTypeList["port"] = new TCPMonitorType();
-        UptimeKumaServer.monitorTypeList["manual"] = new ManualMonitorType();
-        UptimeKumaServer.monitorTypeList["globalping"] = new GlobalpingMonitorType(this.getUserAgent());
-        UptimeKumaServer.monitorTypeList["redis"] = new RedisMonitorType();
-        UptimeKumaServer.monitorTypeList["pm2"] = new PM2MonitorType();
-        UptimeKumaServer.monitorTypeList["system-service"] = new SystemServiceMonitorType();
-        UptimeKumaServer.monitorTypeList["sqlserver"] = new MssqlMonitorType();
-        UptimeKumaServer.monitorTypeList["mysql"] = new MysqlMonitorType();
-        UptimeKumaServer.monitorTypeList["sftp"] = new SFTPMonitorType();
-        UptimeKumaServer.monitorTypeList["oracledb"] = new OracleDbMonitorType();
-        UptimeKumaServer.monitorTypeList["ntp"] = new NTPMonitorType();
+        WebkorpsServer.monitorTypeList["real-browser"] = new RealBrowserMonitorType();
+        WebkorpsServer.monitorTypeList["tailscale-ping"] = new TailscalePing();
+        WebkorpsServer.monitorTypeList["websocket-upgrade"] = new WebSocketMonitorType();
+        WebkorpsServer.monitorTypeList["dns"] = new DnsMonitorType();
+        WebkorpsServer.monitorTypeList["postgres"] = new PostgresMonitorType();
+        WebkorpsServer.monitorTypeList["mqtt"] = new MqttMonitorType();
+        WebkorpsServer.monitorTypeList["smtp"] = new SMTPMonitorType();
+        WebkorpsServer.monitorTypeList["group"] = new GroupMonitorType();
+        WebkorpsServer.monitorTypeList["snmp"] = new SNMPMonitorType();
+        WebkorpsServer.monitorTypeList["grpc-keyword"] = new GrpcKeywordMonitorType();
+        WebkorpsServer.monitorTypeList["mongodb"] = new MongodbMonitorType();
+        WebkorpsServer.monitorTypeList["rabbitmq"] = new RabbitMqMonitorType();
+        WebkorpsServer.monitorTypeList["sip-options"] = new SIPMonitorType();
+        WebkorpsServer.monitorTypeList["gamedig"] = new GameDigMonitorType();
+        WebkorpsServer.monitorTypeList["steam"] = new SteamMonitorType();
+        WebkorpsServer.monitorTypeList["port"] = new TCPMonitorType();
+        WebkorpsServer.monitorTypeList["manual"] = new ManualMonitorType();
+        WebkorpsServer.monitorTypeList["globalping"] = new GlobalpingMonitorType(this.getUserAgent());
+        WebkorpsServer.monitorTypeList["redis"] = new RedisMonitorType();
+        WebkorpsServer.monitorTypeList["pm2"] = new PM2MonitorType();
+        WebkorpsServer.monitorTypeList["system-service"] = new SystemServiceMonitorType();
+        WebkorpsServer.monitorTypeList["sqlserver"] = new MssqlMonitorType();
+        WebkorpsServer.monitorTypeList["mysql"] = new MysqlMonitorType();
+        WebkorpsServer.monitorTypeList["sftp"] = new SFTPMonitorType();
+        WebkorpsServer.monitorTypeList["oracledb"] = new OracleDbMonitorType();
+        WebkorpsServer.monitorTypeList["ntp"] = new NTPMonitorType();
 
         // Allow all CORS origins (polling) in development
         let cors = undefined;
@@ -162,7 +162,7 @@ class UptimeKumaServer {
                 if (transport === "polling") {
                     callback(null, true);
                 } else if (transport === "websocket") {
-                    const bypass = process.env.UPTIME_KUMA_WS_ORIGIN_CHECK === "bypass";
+                    const bypass = process.env.WEBKORPS_WS_ORIGIN_CHECK === "bypass";
                     if (bypass) {
                         log.info("auth", "WebSocket origin check is bypassed");
                         callback(null, true);
@@ -537,7 +537,7 @@ class UptimeKumaServer {
      * @returns {void}
      */
     async startNSCDServices() {
-        if (process.env.UPTIME_KUMA_IS_CONTAINER) {
+        if (process.env.WEBKORPS_IS_CONTAINER) {
             try {
                 log.info("services", "Starting nscd");
                 await childProcessAsync.exec("sudo service nscd start");
@@ -552,7 +552,7 @@ class UptimeKumaServer {
      * @returns {void}
      */
     async stopNSCDServices() {
-        if (process.env.UPTIME_KUMA_IS_CONTAINER) {
+        if (process.env.WEBKORPS_IS_CONTAINER) {
             try {
                 log.info("services", "Stopping nscd");
                 await childProcessAsync.exec("sudo service nscd stop");
@@ -567,7 +567,7 @@ class UptimeKumaServer {
      * @returns {string} User-Agent
      */
     getUserAgent() {
-        return "Uptime-Kuma/" + require("../package.json").version;
+        return "Webkorps/" + require("../package.json").version;
     }
 
     /**
@@ -590,7 +590,7 @@ class UptimeKumaServer {
 }
 
 module.exports = {
-    UptimeKumaServer,
+    WebkorpsServer,
 };
 
 // Must be at the end to avoid circular dependencies

@@ -1,6 +1,6 @@
 //
 //  bark.js
-//  UptimeKuma
+//  Webkorps
 //
 //  Created by Lakr Aream on 2021/10/24.
 //  Copyright © 2021 Lakr Aream. All rights reserved.
@@ -12,7 +12,7 @@ const { default: axios } = require("axios");
 
 // bark is an APN bridge that sends notifications to Apple devices.
 
-const barkNotificationAvatar = "https://github.com/louislam/uptime-kuma/raw/master/public/icon.png";
+const barkNotificationAvatar = "https://github.com/harrssh08/WatchTower/raw/master/public/icon.png";
 const successMessage = "Successes!";
 
 class Bark extends NotificationProvider {
@@ -30,17 +30,17 @@ class Bark extends NotificationProvider {
         }
 
         if (msg != null && heartbeatJSON != null && heartbeatJSON["status"] === UP) {
-            let title = "UptimeKuma Monitor Up";
+            let title = "Webkorps Monitor Up";
             return await this.postNotification(notification, title, msg, barkEndpoint);
         }
 
         if (msg != null && heartbeatJSON != null && heartbeatJSON["status"] === DOWN) {
-            let title = "UptimeKuma Monitor Down";
+            let title = "Webkorps Monitor Down";
             return await this.postNotification(notification, title, msg, barkEndpoint);
         }
 
         if (msg != null) {
-            let title = "UptimeKuma Message";
+            let title = "Webkorps Message";
             return await this.postNotification(notification, title, msg, barkEndpoint);
         }
     }
@@ -59,7 +59,7 @@ class Bark extends NotificationProvider {
             params += "&group=" + notification.barkGroup;
         } else {
             // default name
-            params += "&group=" + "UptimeKuma";
+            params += "&group=" + "Webkorps";
         }
         // picked a sound, this should follow system's mute status when arrival
         if (notification.barkSound != null) {
@@ -111,7 +111,7 @@ class Bark extends NotificationProvider {
                     body: subtitle,
                     icon: barkNotificationAvatar,
                     sound: notification.barkSound || "telegraph", // default sound is telegraph
-                    group: notification.barkGroup || "UptimeKuma", // default group is UptimeKuma
+                    group: notification.barkGroup || "Webkorps", // default group is Webkorps
                 },
                 config
             );

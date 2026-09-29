@@ -94,7 +94,7 @@ export function getRepoNames() {
         // Split by comma
         return process.env.RELEASE_REPO_NAMES.split(",").map((name) => name.trim());
     }
-    return ["louislam/uptime-kuma", "ghcr.io/louislam/uptime-kuma"];
+    return ["harrssh08/watchtower", "ghcr.io/harrssh08/watchtower"];
 }
 
 /**
@@ -161,7 +161,7 @@ export function buildImage(
  */
 export async function checkTagExists(repoNames, version) {
     // Skip if the tag is not on Docker Hub
-    // louislam/uptime-kuma
+    // harrssh08/watchtower
     let dockerHubRepoNames = repoNames.filter((name) => {
         return name.split("/").length === 2;
     });
@@ -350,7 +350,7 @@ ${changelog}`;
 
     console.log(`Draft release ${version} created.`);
     console.log("Next steps:");
-    console.log(`  1. Review the draft release: https://github.com/louislam/uptime-kuma/releases/tag/${version}`);
+    console.log(`  1. Review the draft release: https://github.com/harrssh08/WatchTower/releases/tag/${version}`);
     console.log("  2. Edit if needed and publish.");
     return true;
 }
@@ -398,7 +398,7 @@ export function buildAllImages(repoNames, version, isBeta) {
             repoNames,
             ["beta-slim-rootless", ver(version, "slim-rootless")],
             "rootless",
-            `BASE_IMAGE=louislam/uptime-kuma:base${majorVersion}-slim`
+            `BASE_IMAGE=harrssh08/watchtower:base${majorVersion}-slim`
         );
 
         // Build full image (rootless)
@@ -409,7 +409,7 @@ export function buildAllImages(repoNames, version, isBeta) {
             repoNames,
             ["beta-slim", ver(version, "slim")],
             "release",
-            `BASE_IMAGE=louislam/uptime-kuma:base${majorVersion}-slim`
+            `BASE_IMAGE=harrssh08/watchtower:base${majorVersion}-slim`
         );
 
         // Build full image
@@ -420,7 +420,7 @@ export function buildAllImages(repoNames, version, isBeta) {
             repoNames,
             [`${majorVersion}-slim-rootless`, ver(version, "slim-rootless")],
             "rootless",
-            `BASE_IMAGE=louislam/uptime-kuma:base${majorVersion}-slim`
+            `BASE_IMAGE=harrssh08/watchtower:base${majorVersion}-slim`
         );
 
         // Build full image (rootless)
@@ -431,7 +431,7 @@ export function buildAllImages(repoNames, version, isBeta) {
             repoNames,
             ["next-slim", `${majorVersion}-slim`, ver(version, "slim")],
             "release",
-            `BASE_IMAGE=louislam/uptime-kuma:base${majorVersion}-slim`
+            `BASE_IMAGE=harrssh08/watchtower:base${majorVersion}-slim`
         );
 
         // Build full image
@@ -475,7 +475,7 @@ export function ver(version, identifier) {
 
 /**
  * Upload artifacts to GitHub
- * docker buildx build -f docker/dockerfile --platform linux/amd64 -t louislam/uptime-kuma:upload-artifact --build-arg VERSION --build-arg GITHUB_TOKEN --target upload-artifact . --progress plain
+ * docker buildx build -f docker/dockerfile --platform linux/amd64 -t harrssh08/watchtower:upload-artifact --build-arg VERSION --build-arg GITHUB_TOKEN --target upload-artifact . --progress plain
  * @param {string} version Version
  * @param {string} githubToken GitHub token
  * @returns {void}
@@ -490,7 +490,7 @@ export function uploadArtifacts(version, githubToken) {
         "--platform",
         "linux/amd64",
         "-t",
-        "louislam/uptime-kuma:upload-artifact",
+        "harrssh08/watchtower:upload-artifact",
         "--build-arg",
         `VERSION=${version}`,
         "--build-arg",
@@ -602,8 +602,8 @@ export async function createReleasePR(version, previousVersion, dryRun, branchNa
 
     // Build the artifact link - use direct run link if available, otherwise link to workflow file
     const artifactLink = githubRunId
-        ? `https://github.com/louislam/uptime-kuma/actions/runs/${githubRunId}/workflow`
-        : `https://github.com/louislam/uptime-kuma/actions/workflows/release.yml`;
+        ? `https://github.com/harrssh08/WatchTower/actions/runs/${githubRunId}/workflow`
+        : `https://github.com/harrssh08/WatchTower/actions/workflows/release.yml`;
 
     const tmpDir = "./tmp";
     if (!fs.existsSync(tmpDir)) {
@@ -637,7 +637,7 @@ The \`dist.tar.gz\` archive will be available as an artifact in the [workflow ru
     const prUrl = result.stdout.trim();
     console.log(prUrl);
 
-    // Extract PR number from URL (e.g., https://github.com/louislam/uptime-kuma/pull/1234)
+    // Extract PR number from URL (e.g., https://github.com/harrssh08/WatchTower/pull/1234)
     const prNumberMatch = prUrl.match(/\/pull\/(\d+)/);
     const prNumber = prNumberMatch ? parseInt(prNumberMatch[1], 10) : null;
 

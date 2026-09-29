@@ -41,12 +41,12 @@ describe("Indigo notification provider", () => {
             requests.map((r) => r.body),
             [
                 {
-                    id: "uptime-kuma",
+                    id: "webkorps",
                     message: "indigo.variable.updateValue",
                     objectId: 111,
                     parameters: { value: "[MQTT] [🔴 Down] timeout" },
                 },
-                { id: "uptime-kuma", message: "indigo.actionGroup.execute", objectId: 222 },
+                { id: "webkorps", message: "indigo.actionGroup.execute", objectId: 222 },
             ]
         );
         assert.strictEqual(requests[0].auth, "Bearer key");
@@ -59,9 +59,9 @@ describe("Indigo notification provider", () => {
     test("reports Indigo's HTTP 400 validation errors", async () => {
         status = 400;
         reply = {
-            id: "uptime-kuma",
+            id: "webkorps",
             validationErrors: { objectId: "id is not a valid Indigo Action Group" },
-            error: "invalid command payload received, id: 'uptime-kuma'",
+            error: "invalid command payload received, id: 'webkorps'",
         };
         await assert.rejects(
             new Indigo().send(notification({ indigoActionGroupId: "1" }), "msg"),
@@ -71,7 +71,7 @@ describe("Indigo notification provider", () => {
     });
 
     test("reports errors Indigo returns in the response body", async () => {
-        reply = { error: "object not found", id: "uptime-kuma" };
+        reply = { error: "object not found", id: "webkorps" };
         await assert.rejects(
             new Indigo().send(notification({ indigoActionGroupId: "999" }), "msg"),
             /object not found/

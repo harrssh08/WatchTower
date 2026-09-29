@@ -49,7 +49,7 @@ const { Proxy } = require("../proxy");
 const { demoMode } = require("../config");
 const version = require("../../package.json").version;
 const apicache = require("../modules/apicache");
-const { UptimeKumaServer } = require("../uptime-kuma-server");
+const { WebkorpsServer } = require("../webkorps-server");
 const { DockerHost } = require("../docker");
 const crypto = require("crypto");
 const { UptimeCalculator } = require("../uptime-calculator");
@@ -466,7 +466,7 @@ class Monitor extends BeanModel {
             }
 
             // Runtime patch timeout if it is 0
-            // See https://github.com/louislam/uptime-kuma/pull/3961#issuecomment-1804149144
+            // See https://github.com/harrssh08/WatchTower/pull/3961#issuecomment-1804149144
             if (!this.timeout || this.timeout <= 0) {
                 this.timeout = this.interval * 1000 * 0.8;
             }
@@ -679,7 +679,7 @@ class Monitor extends BeanModel {
                     }
 
                     // eslint-disable-next-line eqeqeq
-                    if (process.env.UPTIME_KUMA_LOG_RESPONSE_BODY_MONITOR_ID == this.id) {
+                    if (process.env.WEBKORPS_LOG_RESPONSE_BODY_MONITOR_ID == this.id) {
                         log.info("monitor", res.data);
                     }
 
@@ -871,10 +871,10 @@ class Monitor extends BeanModel {
                     bean.msg = resp.code;
                     bean.status = UP;
                     bean.ping = dayjs().valueOf() - startTime;
-                } else if (this.type in UptimeKumaServer.monitorTypeList) {
+                } else if (this.type in WebkorpsServer.monitorTypeList) {
                     let startTime = dayjs().valueOf();
-                    const monitorType = UptimeKumaServer.monitorTypeList[this.type];
-                    await monitorType.check(this, bean, UptimeKumaServer.getInstance());
+                    const monitorType = WebkorpsServer.monitorTypeList[this.type];
+                    await monitorType.check(this, bean, WebkorpsServer.getInstance());
 
                     if (!monitorType.allowCustomStatus && bean.status !== UP) {
                         throw new Error(
@@ -895,7 +895,7 @@ class Monitor extends BeanModel {
                         {
                             allowAutoTopicCreation: this.kafkaProducerAllowAutoTopicCreation,
                             ssl: this.kafkaProducerSsl,
-                            clientId: `Uptime-Kuma/${version}`,
+                            clientId: `Webkorps/${version}`,
                             interval: this.interval,
                             connectionTimeout: this.timeout,
                         },
@@ -987,7 +987,7 @@ class Monitor extends BeanModel {
                 log.debug("monitor", `[${this.name}] apicache clear`);
                 apicache.clear();
 
-                await UptimeKumaServer.getInstance().sendMaintenanceListByUserID(this.user_id);
+                await WebkorpsServer.getInstance().sendMaintenanceListByUserID(this.user_id);
             } else {
                 bean.important = false;
 
@@ -1026,7 +1026,7 @@ class Monitor extends BeanModel {
                     ) {
                         log.warn(
                             "domain_expiry",
-                            `Domain expiry unsupported for '.${error.meta.publicSuffix}' because it lacks an RDAP endpoint in the IANA database. This isn’t an Uptime Kuma bug, a limitation of your registry. If an RDAP server exists, ask your registrar politely to submit it to IANA so expiry checks can work.`
+                            `Domain expiry unsupported for '.${error.meta.publicSuffix}' because it lacks an RDAP endpoint in the IANA database. This isn’t an Webkorps bug, a limitation of your registry. If an RDAP server exists, ask your registrar politely to submit it to IANA so expiry checks can work.`
                         );
                     }
                 }
@@ -1098,8 +1098,8 @@ class Monitor extends BeanModel {
                 await beat();
             } catch (e) {
                 console.trace(e);
-                UptimeKumaServer.errorLog(e, false);
-                log.error("monitor", "Please report to https://github.com/louislam/uptime-kuma/issues");
+                WebkorpsServer.errorLog(e, false);
+                log.error("monitor", "Please report to https://github.com/harrssh08/WatchTower/issues");
 
                 if (!this.isStop) {
                     log.info("monitor", "Try to restart the monitor");
@@ -1476,8 +1476,8 @@ class Monitor extends BeanModel {
             }
 
             // Also provide the time in server timezone
-            heartbeatJSON["timezone"] = await UptimeKumaServer.getInstance().getTimezone();
-            heartbeatJSON["timezoneOffset"] = UptimeKumaServer.getInstance().getTimezoneOffset();
+            heartbeatJSON["timezone"] = await WebkorpsServer.getInstance().getTimezone();
+            heartbeatJSON["timezoneOffset"] = WebkorpsServer.getInstance().getTimezoneOffset();
             heartbeatJSON["localDateTime"] = dayjs
                 .utc(heartbeatJSON["time"])
                 .tz(heartbeatJSON["timezone"])
@@ -1608,7 +1608,7 @@ class Monitor extends BeanModel {
         );
 
         for (const maintenanceID of maintenanceIDList) {
-            const maintenance = await UptimeKumaServer.getInstance().getMaintenance(maintenanceID);
+            const maintenance = await WebkorpsServer.getInstance().getMaintenance(maintenanceID);
             if (maintenance && (await maintenance.isUnderMaintenance())) {
                 return true;
             }
@@ -1991,7 +1991,7 @@ class Monitor extends BeanModel {
      * @returns {Promise<void>}
      */
     static async deleteMonitor(monitorID, userID) {
-        const server = UptimeKumaServer.getInstance();
+        const server = WebkorpsServer.getInstance();
 
         // Stop the monitor if it's running
         if (monitorID in server.monitorList) {

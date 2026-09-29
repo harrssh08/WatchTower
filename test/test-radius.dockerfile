@@ -1,5 +1,5 @@
 # Container running a test radius server
-# More instructions in https://github.com/louislam/uptime-kuma/pull/1635
+# More instructions in https://github.com/harrssh08/WatchTower/pull/1635
 
 FROM freeradius/freeradius-server:latest
 

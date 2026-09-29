@@ -10,7 +10,7 @@ import * as github from "@actions/github";
 
         const issue = {
             owner: "louislam",
-            repo: "uptime-kuma",
+            repo: "webkorps",
             number: issueNumber,
         };
 
@@ -37,7 +37,7 @@ import * as github from "@actions/github";
                 owner: issue.owner,
                 repo: issue.repo,
                 issue_number: issue.number,
-                body: `@${username}: Hello! :wave:\n\nThis issue is being automatically closed because it does not follow the issue template. Please **DO NOT open blank issues and use our [issue-templates](https://github.com/louislam/uptime-kuma/issues/new/choose) instead**.\nBlank Issues do not contain the context necessary for a good discussion.`,
+                body: `@${username}: Hello! :wave:\n\nThis issue is being automatically closed because it does not follow the issue template. Please **DO NOT open blank issues and use our [issue-templates](https://github.com/harrssh08/WatchTower/issues/new/choose) instead**.\nBlank Issues do not contain the context necessary for a good discussion.`,
             });
 
             // Close the issue

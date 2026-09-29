@@ -144,7 +144,7 @@ function createAuthInstance() {
  * @returns The authentication secret
  */
 export function getAuthSecret() {
-    const env = process.env.UPTIME_KUMA_AUTH_SECRET;
+    const env = process.env.WEBKORPS_AUTH_SECRET;
     if (env) {
         return env;
     }
@@ -284,7 +284,7 @@ export async function migrateUser(username: string, password: string) {
             const newUser = await auth().api.createUser({
                 body: {
                     name: username,
-                    email: `${username}@noreply.uptime-kuma.internal`,
+                    email: `${username}@noreply.webkorps.internal`,
                     password,
                     role: "admin",
                     data: {

@@ -1,4 +1,4 @@
-console.log("== Uptime Kuma Reset Password Tool ==");
+console.log("== Webkorps Reset Password Tool ==");
 
 import { loadEnvFile } from "node:process";
 import { auth } from "../server/better-auth";

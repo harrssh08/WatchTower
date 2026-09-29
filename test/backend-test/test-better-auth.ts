@@ -13,7 +13,7 @@ test("Basic Auth", async (t) => {
         await auth().api.createUser({
             body: {
                 name: "admin",
-                email: "admin@noreply.uptime-kuma.internal",
+                email: "admin@noreply.webkorps.internal",
                 password: "Kuma-Test-8f4Q2xR9p",
                 role: "admin",
                 data: {

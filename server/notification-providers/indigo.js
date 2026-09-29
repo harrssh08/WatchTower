@@ -49,7 +49,7 @@ class Indigo extends NotificationProvider {
             config = this.getAxiosConfigWithProxy(config);
 
             for (const command of commands) {
-                const result = await axios.post(url, { id: "uptime-kuma", ...command }, config);
+                const result = await axios.post(url, { id: "webkorps", ...command }, config);
                 if (result.data?.error || result.data?.validationErrors) {
                     throw new Error(
                         `Indigo rejected ${command.message}: ${result.data.error || JSON.stringify(result.data.validationErrors)}`

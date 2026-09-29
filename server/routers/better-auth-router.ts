@@ -43,7 +43,7 @@ export async function createBetterAuthRouter() {
             try {
                 if (!(await needSetup())) {
                     throw new Error(
-                        "Uptime Kuma has been initialized. If you want to run setup again, please delete the database."
+                        "Webkorps has been initialized. If you want to run setup again, please delete the database."
                     );
                 }
                 processingSetup = true;
@@ -53,7 +53,7 @@ export async function createBetterAuthRouter() {
                 const user = await auth().api.createUser({
                     body: {
                         name: username,
-                        email: `${username}@noreply.uptime-kuma.internal`,
+                        email: `${username}@noreply.webkorps.internal`,
                         password,
                         role: "admin",
                         data: {

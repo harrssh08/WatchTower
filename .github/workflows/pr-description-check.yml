@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   check-pr-description:
-    if: github.repository == 'louislam/uptime-kuma'
+    if: github.repository == 'harrssh08/watchtower'
     name: Check PR description and close if missing template phrase
     runs-on: ubuntu-latest
     permissions:
@@ -26,7 +26,7 @@ jobs:
             const body = (pr && pr.body) ? pr.body : "";
             const requiredPhrase = "avoid unnecessary back and forth";
 
-            const exclude = ["UptimeKumaBot", "Copilot", "copilot-swe-agent", "dependabot[bot]"];
+            const exclude = ["WebkorpsBot", "Copilot", "copilot-swe-agent", "dependabot[bot]"];
             const excludeLower = exclude.map((e) => e.toLowerCase());
             const author = pr?.user?.login || "";
 
