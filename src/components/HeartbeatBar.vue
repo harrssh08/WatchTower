@@ -564,7 +564,7 @@ export default {
                 down: rootStyles.getPropertyValue("--bs-danger") || "#dc3545",
                 pending: rootStyles.getPropertyValue("--bs-warning") || "#ffc107",
                 maintenance: rootStyles.getPropertyValue("--maintenance") || "#1d4ed8",
-                up: rootStyles.getPropertyValue("--bs-primary") || "#005eb8",
+                up: rootStyles.getPropertyValue("--bs-primary") || "#1a87c8",
             };
 
             // Draw each beat

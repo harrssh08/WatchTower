@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             system: window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
-            userTheme: localStorage.theme,
+            userTheme: "light",
             userHeartbeatBar: localStorage.heartbeatBarTheme,
             styleElapsedTime: localStorage.styleElapsedTime,
             statusPageTheme: "light",
@@ -12,10 +12,7 @@ export default {
     },
 
     mounted() {
-        // Default Light
-        if (!this.userTheme) {
-            this.userTheme = "auto";
-        }
+        localStorage.theme = "light";
 
         // Default Heartbeat Bar
         if (!this.userHeartbeatBar) {
@@ -51,12 +48,9 @@ export default {
                     return this.system;
                 }
                 return this.statusPageTheme;
-            } else {
-                if (this.userTheme === "auto") {
-                    return this.system;
-                }
-                return this.userTheme;
             }
+
+            return "light";
         },
 
         isDark() {
@@ -99,11 +93,7 @@ export default {
          * @returns {void}
          */
         updateThemeColorMeta() {
-            if (this.theme === "dark") {
-                document.querySelector("#theme-color").setAttribute("content", "#09244a");
-            } else {
-                document.querySelector("#theme-color").setAttribute("content", "#005eb8");
-            }
+            document.querySelector("#theme-color").setAttribute("content", "#1a87c8");
         },
     },
 };

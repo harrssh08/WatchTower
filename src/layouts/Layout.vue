@@ -238,6 +238,12 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/vars.scss";
 
+header {
+    background-color: #fff;
+    border-bottom-color: #d8edf8 !important;
+    box-shadow: 0 4px 18px rgba(26, 135, 200, 0.06);
+}
+
 .nav-link {
     &:hover {
         background-color: $primary;

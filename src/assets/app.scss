@@ -18,6 +18,11 @@
         noto color emoji;
 }
 
+body {
+    color: #183b56;
+    background-color: #f4faff;
+}
+
 h1 {
     font-size: 32px;
 }
@@ -108,7 +113,9 @@ optgroup {
 
 .shadow-box {
     //overflow: hidden;   // Forget why add this, but multiple select hide by this
-    box-shadow: 0 15px 70px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #d8edf8;
+    box-shadow: 0 12px 38px rgba(26, 135, 200, 0.08);
     padding: 10px;
     border-radius: 10px;
 
@@ -144,7 +151,7 @@ optgroup {
 }
 
 .btn-normal {
-    $bg-color: #f5f5f5;
+    $bg-color: #eaf6fc;
 
     background-color: $bg-color;
     border-color: $bg-color;
@@ -153,6 +160,17 @@ optgroup {
         $hover-color: darken($bg-color, 3%);
         background-color: $hover-color;
         border-color: $hover-color;
+    }
+}
+
+.form-control,
+.form-select {
+    background-color: #fff;
+    border-color: #cbe5f3;
+
+    &:focus {
+        border-color: #68b8e5;
+        box-shadow: 0 0 0 0.2rem rgba(26, 135, 200, 0.14);
     }
 }
 
@@ -516,7 +534,7 @@ optgroup {
         }
 
         &.active {
-            background-color: #cdf8f4;
+            background-color: #dff2fc;
         }
         .tags {
             // Removes margin to line up tags list with uptime percentage

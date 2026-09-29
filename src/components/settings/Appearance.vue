@@ -27,31 +27,6 @@
                         {{ $t("Light") }}
                     </label>
 
-                    <input
-                        id="btncheck2"
-                        v-model="$root.userTheme"
-                        type="radio"
-                        class="btn-check"
-                        name="theme"
-                        autocomplete="off"
-                        value="dark"
-                    />
-                    <label class="btn btn-outline-primary" for="btncheck2">
-                        {{ $t("Dark") }}
-                    </label>
-
-                    <input
-                        id="btncheck3"
-                        v-model="$root.userTheme"
-                        type="radio"
-                        class="btn-check"
-                        name="theme"
-                        autocomplete="off"
-                        value="auto"
-                    />
-                    <label class="btn btn-outline-primary" for="btncheck3">
-                        {{ $t("Auto") }}
-                    </label>
                 </div>
             </div>
         </div>
