@@ -1,7 +1,7 @@
 # Build and push (multi arch):
-# docker buildx build -f Dockerfile.latest-warning --platform linux/amd64,linux/arm64,linux/arm/v7 -t louislam/uptime-kuma:latest -t louislam/uptime-kuma:1 --push .
+# docker buildx build -f Dockerfile.latest-warning --platform linux/amd64,linux/arm64,linux/arm/v7 -t harrssh08/watchtower:latest -t harrssh08/watchtower:1 --push .
 
-FROM louislam/uptime-kuma:1.23.17-debian
+FROM harrssh08/watchtower:1.23.17-debian
 COPY docker-latest-warning.js /app/dist/docker-latest-warning.js
 RUN rm -f /app/dist/index.html.gz /app/dist/index.html.br \
     && sed -i 's#</head>#<script src="/docker-latest-warning.js"></script></head>#' /app/dist/index.html \

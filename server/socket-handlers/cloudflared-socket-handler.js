@@ -1,9 +1,9 @@
 const { checkLogin, setSetting, setting } = require("../util-server");
 const { CloudflaredTunnel } = require("node-cloudflared-tunnel");
-const { UptimeKumaServer } = require("../uptime-kuma-server");
+const { WebkorpsServer } = require("../webkorps-server");
 const { log } = require("../../src/util");
 const { doubleCheckPassword } = require("../better-auth");
-const io = UptimeKumaServer.getInstance().io;
+const io = WebkorpsServer.getInstance().io;
 
 const prefix = "cloudflared_";
 const cloudflared = new CloudflaredTunnel();

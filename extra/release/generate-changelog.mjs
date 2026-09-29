@@ -8,7 +8,7 @@ import * as fs from "fs";
 const ignoreList = [
     "louislam",
     "CommanderStorm",
-    "UptimeKumaBot",
+    "WebkorpsBot",
     "weblate",
     "Copilot",
     "autofix-ci[bot]",

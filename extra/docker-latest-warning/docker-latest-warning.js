@@ -23,12 +23,12 @@
             "uk-latest-warning d-flex align-items-center justify-content-center p-3 bg-dark text-white overflow-auto";
         overlay.innerHTML = `
             <div style="max-width: 640px;">
-                <h3 class="mb-3">⚠️ This Uptime Kuma version is outdated!</h3>
+                <h3 class="mb-3">⚠️ This Webkorps version is outdated!</h3>
                 <p>
                     Current Version: 1.23.17 (Outdated!)
                 </p>
                 <p>
-                    You are running the <code>latest</code> tag, which still points to Uptime Kuma v1.
+                    You are running the <code>latest</code> tag, which still points to Webkorps v1.
                     It is NO LONGER maintained and does not receive any bug or security fixes.
                 </p>
                 <p>
@@ -36,7 +36,7 @@
                 </p>
                 <p class="mb-4">
                     Read more:
-                    <a class="link-light" href="https://github.com/louislam/uptime-kuma/wiki/Docker-Tags" target="_blank" rel="noopener noreferrer">Recommended Docker Tags</a>
+                    <a class="link-light" href="https://github.com/harrssh08/WatchTower/wiki/Docker-Tags" target="_blank" rel="noopener noreferrer">Recommended Docker Tags</a>
                 </p>
                 <button type="button" class="btn btn-danger">Ignore and continue with the old version</button>
             </div>
